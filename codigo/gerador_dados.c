@@ -8,15 +8,15 @@ int grande = 4000000; // 3 minutos (testar tempo de tds)
 
 void gerar_arquivo(const char* nome, int quantidade) {
 	FILE *arquivo = fopen(nome, "wb");
-	if (!arquivo) {
-    	perror("Erro ao abrir arquivo");
-    	exit(1);
+		if (!arquivo) {
+    		perror("Erro ao abrir arquivo");
+    		exit(1);
 	}
 
 	srand(time(NULL));
 	for (int i = 0; i < quantidade; i++) {
-    	int numero = rand() % 100000;  // números entre 0 e 99999
-    	fwrite(&numero, sizeof(int), 1, arquivo);
+    		int numero = rand() % 100000;  // números entre 0 e 99999
+    		fwrite(&numero, sizeof(int), 1, arquivo);
 	}
 
 	fclose(arquivo);
