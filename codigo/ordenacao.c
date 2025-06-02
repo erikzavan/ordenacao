@@ -9,6 +9,22 @@ void trocar(int *a, int *b) {
 }
 
 // SelectionSort
+void SelectionSort(int v[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        int menorIndice = i;
+        for(int indiceSeguinte = i+1; indiceSeguinte < n; indiceSeguinte++)
+        {
+            if (v[indiceSeguinte] > v[menorIndice]) continue;
+            menorIndice = indiceSeguinte;
+        }
+
+        int aux = v[i];
+        v[i] = v[menorIndice];
+        v[menorIndice] = aux;
+    }
+}
 
 // BubbleSort (padrao) 
 void bubble_sort(int v[], int n) {
@@ -38,6 +54,8 @@ void bubble_sort_otimizado(int v[], int n) {
 }
 
 // InsertionSort (padrao)
+
+
 // InsertionSort (otimizado)
 
 
