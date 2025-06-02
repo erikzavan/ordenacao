@@ -79,7 +79,6 @@ void insertion_sort_otimizado(int v[], int n)
         int atual = v[i];
         int j = i - 1;
         
-        // Move os elementos maiores que 'atual' uma posição à frente
         while (j >= 0 && v[j] > atual) {
             v[j + 1] = v[j];
             j--;
