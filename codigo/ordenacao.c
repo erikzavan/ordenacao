@@ -54,12 +54,39 @@ void bubble_sort_otimizado(int v[], int n) {
 }
 
 // InsertionSort (padrao)
+void insertion_sort(int v[], int n)
+{
+    for (int i = 1; i < n; i++)
+    {
+        int atual = v[i];
+        int anterior = i - 1;
+        
+        while ((anterior >= 0) && (v[anterior] > atual))
+        {
+            int proximo = anterior + 1;
+            v[proximo] = v[anterior];
+            anterior--;
+        }
 
+        v[anterior + 1] = atual;
+    }
+}
 
 // InsertionSort (otimizado)
-
-
-
+void insertion_sort_otimizado(int v[], int n)
+{
+    for (int i = 1; i < n; i++) {
+        int atual = v[i];
+        int j = i - 1;
+        
+        // Move os elementos maiores que 'atual' uma posição à frente
+        while (j >= 0 && v[j] > atual) {
+            v[j + 1] = v[j];
+            j--;
+        }
+        v[j + 1] = atual;
+    }
+}
 
 // para medir o tempo
 
