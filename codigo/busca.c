@@ -27,26 +27,26 @@ int* carregar_dados(const char *nome_arquivo, int *tamanho) {
     return dados;
 }
 
-int busca_sequencial(int *v, int tamanho, int alvo) {
+int busca_sequencial(int *v, int tamanho, int alvo, long* comp) {
     for (int i = 0; i < tamanho; i++) {
+        (*comp)++;
         if (v[i] == alvo)
             return i;
     }
     return -1;
 }
 
-int busca_binaria(int *v, int tamanho, int alvo) {
-    int inicio = 0;
-    int fim = tamanho - 1;
-
-    while (inicio <= fim) {
-        int meio = (inicio + fim) / 2;
+int busca_binaria(int *v, int tamanho, int alvo, long* comp) {
+    int ini = 0, fim = tamanho - 1;
+    while (ini <= fim) {
+        (*comp)++;
+        int meio = (ini + fim) / 2;
         if (v[meio] == alvo)
             return meio;
-        else if (v[meio] < alvo)
-            inicio = meio + 1;
-        else
+        else if (alvo < v[meio])
             fim = meio - 1;
+        else
+            ini = meio + 1;
     }
     return -1;
 }

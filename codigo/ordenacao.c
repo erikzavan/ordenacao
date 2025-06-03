@@ -36,15 +36,17 @@ void trocar(int *a, int *b) {
 }
 
 // SelectionSort
-void selection_sort(int v[], int n, const char* nome) {
+void selection_sort(int v[], int n, const char* nome, long* comp, long* troc) {
     for (int i = 0; i < n; i++) {
         int menorIndice = i;
         for (int j = i + 1; j < n; j++) {
+            (*comp)++;
             if (v[j] < v[menorIndice]) {
                 menorIndice = j;
             }
         }
         trocar(&v[i], &v[menorIndice]);
+        (*troc)++;
 
         if (i % (n / 1000 + 1) == 0) {
             mostrar_progresso(i, n, nome);
@@ -55,11 +57,13 @@ void selection_sort(int v[], int n, const char* nome) {
 }
 
 // BubbleSort (padrao) 
-void bubble_sort(int v[], int n, const char* nome) {
+void bubble_sort(int v[], int n, const char* nome, long* comp, long* troc) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - 1 - i; j++) {
+            (*comp)++;
             if (v[j] > v[j + 1]) {
                 trocar(&v[j], &v[j + 1]);
+                (*troc)++;
             }
         }
         if (i % (n / 1000 + 1) == 0) {
@@ -71,13 +75,15 @@ void bubble_sort(int v[], int n, const char* nome) {
 }
 
 // BubbleSort (otimizado)
-void bubble_sort_otimizado(int v[], int n, const char* nome) {
+void bubble_sort_otimizado(int v[], int n, const char* nome, long* comp, long* troc) {
     int trocou;
     for (int i = 0; i < n - 1; i++) {
         trocou = 0;
         for (int j = 0; j < n - 1 - i; j++) {
+            (*comp)++;
             if (v[j] > v[j + 1]) {
                 trocar(&v[j], &v[j + 1]);
+                (*troc)++;
                 trocou = 1;
             }
         }
@@ -91,13 +97,16 @@ void bubble_sort_otimizado(int v[], int n, const char* nome) {
 }
 
 // InsertionSort (padrao)
-void insertion_sort(int v[], int n, const char* nome) {
+void insertion_sort(int v[], int n, const char* nome, long* comp, long* troc) {
     for (int i = 1; i < n; i++) {
         int atual = v[i];
         int j = i - 1;
+        (*comp)++;
         while (j >= 0 && v[j] > atual) {
             v[j + 1] = v[j];
             j--;
+            (*comp)++;
+            (*troc)++;
         }
         v[j + 1] = atual;
 
@@ -110,15 +119,17 @@ void insertion_sort(int v[], int n, const char* nome) {
 }
 
 // InsertionSort (otimizado)
-void insertion_sort_otimizado(int v[], int n, const char* nome)
+void insertion_sort_otimizado(int v[], int n, const char* nome, long* comp, long* troc)
 {
     for (int i = 1; i < n; i++) {
         int atual = v[i];
         int j = i - 1;
-        
+        (*comp)++;
         while (j >= 0 && v[j] > atual) {
             v[j + 1] = v[j];
             j--;
+            (*comp)++;
+            (*troc)++;
         }
         v[j + 1] = atual;
 

@@ -11,13 +11,14 @@ void copiar_vetor(int* destino, int* origem, int tamanho) {
         destino[i] = origem[i];
 }
 
-void salvar_csv(const char *algoritmo, const char* nome_arquivo, double tempo) {
+void salvar_csv(const char *algoritmo, const char* nome_arquivo, double tempo, long comparacoes, long trocas) {
     FILE *file = fopen("tempos.csv", "a");
     if (!file){
+        perror("erro ao abrir tempos.csv");
         exit(1);
     }
 
-    fprintf(file, "%s,%s,%.4f\n", algoritmo, nome_arquivo, tempo);
+    fprintf(file, "%s,%s,%.4f,%ld,%ld\n", algoritmo, nome_arquivo, tempo, comparacoes, trocas);
     fclose(file);
 }
 
