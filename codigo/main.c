@@ -15,6 +15,7 @@ int main() {
     ordenar_todos("dados/grande.bin", "grande");
 
     menu_busca();
+
     return 0;
 }
 

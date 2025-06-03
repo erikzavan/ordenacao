@@ -36,7 +36,7 @@ void menu_busca() {
 
         while (1) {
             printf("\ntipo de busca (sequencial / binaria): ");
-            scanf("%s", tipo_busca);
+            scanf("%s", &tipo_busca);
             if (strcmp(tipo_busca, "0") == 0) return;
             if (strcmp(tipo_busca, "sequencial") == 0 || strcmp(tipo_busca, "binaria") == 0) break;
             printf("tipo invalido digite novamente\n");
@@ -44,7 +44,7 @@ void menu_busca() {
 
         while (1) {
             printf("\ntipo de ordenacao (selection / bubble / bubble_otimizado / insertion / insertion_otimizado): ");
-            scanf("%s", tipo_ordenacao);
+            scanf("%s", &tipo_ordenacao);
             if (strcmp(tipo_ordenacao, "0") == 0) return;
             if (
                 strcmp(tipo_ordenacao, "selection") == 0 ||
@@ -58,7 +58,7 @@ void menu_busca() {
 
         while (1) {
             printf("\ntamanho do arquivo (pequeno / medio / grande): ");
-            scanf("%s", tamanho_arquivo);
+            scanf("%s", &tamanho_arquivo);
             if (strcmp(tamanho_arquivo, "0") == 0) return;
             if (
                 strcmp(tamanho_arquivo, "pequeno") == 0 ||
@@ -71,7 +71,7 @@ void menu_busca() {
         printf("\nvalor a ser buscado (ou 0 para sair): ");
         scanf("%d", &valor);
         if (valor == 0) return;
-
+        
         char nome_arquivo[100];
         sprintf(nome_arquivo, "dados/ordenado_%s_%s.bin", tipo_ordenacao, tamanho_arquivo);
 
