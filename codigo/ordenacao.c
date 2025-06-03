@@ -128,3 +128,39 @@ void insertion_sort_otimizado(int v[], int n, const char* nome)
     mostrar_progresso(n, n, nome);
     printf("\n");
 }
+
+void processar_ordenacao(const char* nome_algoritmo,
+                         void (*alg)(int*, int, const char*),
+                         int* original, int tamanho,
+                         const char* nome_entrada) {
+    int* temp = malloc(tamanho * sizeof(int));
+    if (!temp) {
+        perror("erro ao alocar vetor temp\n");
+        exit(1);
+    }
+
+    copiar_vetor(temp, original, tamanho);
+    double tempo = medir_tempo(alg, temp, tamanho, nome_algoritmo);
+    salvar_csv(nome_algoritmo, nome_entrada, tempo);
+
+    char nome_bin[100];
+    sprintf(nome_bin, "dados/ordenado_%s_%s.bin", nome_algoritmo, nome_entrada);
+    salvar_vetor(nome_bin, temp, tamanho);
+
+    free(temp);
+}
+
+void ordenar_todos(const char* arquivo, const char* nome_entrada) {
+    int tamanho;
+    int* original = carregar_dados(arquivo, &tamanho);
+
+    printf("ordenando %s...\n", nome_entrada);
+
+    processar_ordenacao("selection", selection_sort, original, tamanho, nome_entrada);
+    processar_ordenacao("bubble", bubble_sort, original, tamanho, nome_entrada);
+    processar_ordenacao("bubble_otimizado", bubble_sort_otimizado, original, tamanho, nome_entrada);
+    processar_ordenacao("insertion", insertion_sort, original, tamanho, nome_entrada);
+    processar_ordenacao("insertion_otimizado", insertion_sort_otimizado, original, tamanho, nome_entrada);
+
+    free(original);
+}
