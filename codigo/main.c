@@ -14,3 +14,5 @@ int main() {
     menu_busca();
     return 0;
 }
+
+// gcc codigo/main.c codigo/ordenacao.c codigo/busca.c codigo/gerador_dados.c codigo/app_utils.c -o programa
