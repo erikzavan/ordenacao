@@ -14,7 +14,7 @@ void copiar_vetor(int* destino, int* origem, int tamanho) {
 }
 
 void salvar_csv(const char *algoritmo, const char* nome_arquivo, double tempo, long comparacoes, long trocas) {
-    FILE *file = fopen("tempos.csv", "a");
+    FILE *file = fopen("graficos/tempos.csv", "a");
     if (!file){
         perror("erro ao abrir tempos.csv");
         exit(1);

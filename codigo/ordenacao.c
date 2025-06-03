@@ -40,15 +40,20 @@ void trocar(int *a, int *b) {
 void selection_sort(int v[], int n, const char* nome, unsigned long long* comp, unsigned long long* troc) {
     unsigned long long comps_real = 0, trocs_real = 0;
     for (int i = 0; i < n; i++) {
-        int menorIndice = i;
+        int menor_indice = i;
         for (int j = i + 1; j < n; j++) {
             comps_real++;
-            if (v[j] < v[menorIndice]) {
-                menorIndice = j;
+            if (v[j] < v[menor_indice]) {
+                menor_indice = j;
             }
         }
-        trocar(&v[i], &v[menorIndice]);
-        trocs_real++;
+
+        if (v[i] != v[menor_indice])
+        {
+            trocar(&v[i], &v[menor_indice]);
+            trocs_real++;
+        }
+
         if (i % (n / 1000 + 1) == 0) {
             mostrar_progresso(i, n, nome);
         }
