@@ -14,7 +14,7 @@ void copiar_vetor(int* destino, int* origem, int tamanho) {
 }
 
 void salvar_csv(const char *algoritmo, const char* nome_arquivo, double tempo) {
-    FILE *file = fopen("tempos.csv", "w");
+    FILE *file = fopen("tempos.csv", "a");
     if (!file){
         exit(1);
     }
@@ -29,6 +29,12 @@ int main() {
     int medio = 100000; // 30 segundos
     int grande = 250000; // 3 minutos (testar tempo de tds)
     
+    //limpar csv
+
+    FILE *f = fopen("tempos.csv", "w");
+    fprintf(f, "Algoritmo,Tamanho,Tempo\n");
+    fclose(f);
+
     //gerador
 
     char resposta;
