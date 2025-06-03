@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "ordenacao.h"
+#include "busca.h"
+#include "app_utils.h"
 
 void mostrar_progresso(int atual, int total, const char* nome) {
     double pct = (100.0 * atual) / total;
