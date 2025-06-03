@@ -5,6 +5,8 @@
 #include "ordenacao.h"
 #include "gerador_dados.h"
 #include "app_utils.h"
+#define ESCALA 10000L
+
 
 void copiar_vetor(int* destino, int* origem, int tamanho) {
     for (int i = 0; i < tamanho; i++)
@@ -96,6 +98,6 @@ void limpar_csv() {
         perror("Erro ao limpar tempos.csv");
         exit(EXIT_FAILURE);
     }
-    fprintf(file, "Algoritmo,Tamanho,Tempo,Comparacoes,Trocas\n");
+    fprintf(file, "Algoritmo,Tamanho,Tempo,Comparacoes (cada 10 mil),Trocas (cada 10 mil)\n");
     fclose(file);
 }

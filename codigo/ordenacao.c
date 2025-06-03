@@ -1,9 +1,11 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "ordenacao.h"
 #include "busca.h"
 #include "app_utils.h"
+#define ESCALA 10000L
 
 void mostrar_progresso(int atual, int total, const char* nome) {
     double pct = (100.0 * atual) / total;
@@ -18,13 +20,14 @@ void mostrar_progresso(int atual, int total, const char* nome) {
     fflush(stdout);
 }
 
-double medir_tempo(void (*func)(int*, int, const char*, long*, long*), int* v, int n, const char* nome, long* comp, long* troc) {
+double medir_tempo(void (*func)(int*, int, const char*, unsigned long long*, unsigned long long*), int* v, int n, const char* nome, unsigned long long* comp, unsigned long long* troc) {
     clock_t inicio = clock();
     func(v, n, nome, comp, troc);
     clock_t fim = clock();
 
     double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
     printf("tempo de execucao: %.2f segundos\n---\n", tempo);
+
     return tempo;
 }
 
@@ -34,35 +37,36 @@ void trocar(int *a, int *b) {
     *b = temp;
 }
 
-// SelectionSort
-void selection_sort(int v[], int n, const char* nome, long* comp, long* troc) {
+void selection_sort(int v[], int n, const char* nome, unsigned long long* comp, unsigned long long* troc) {
+    unsigned long long comps_real = 0, trocs_real = 0;
     for (int i = 0; i < n; i++) {
         int menorIndice = i;
         for (int j = i + 1; j < n; j++) {
-            (*comp)++;
+            comps_real++;
             if (v[j] < v[menorIndice]) {
                 menorIndice = j;
             }
         }
         trocar(&v[i], &v[menorIndice]);
-        (*troc)++;
-
+        trocs_real++;
         if (i % (n / 1000 + 1) == 0) {
             mostrar_progresso(i, n, nome);
         }
     }
     mostrar_progresso(n, n, nome);
     printf("\n");
+    *comp = comps_real / ESCALA;
+    *troc = trocs_real / ESCALA;
 }
 
-// BubbleSort (padrao) 
-void bubble_sort(int v[], int n, const char* nome, long* comp, long* troc) {
+void bubble_sort(int v[], int n, const char* nome, unsigned long long* comp, unsigned long long* troc) {
+    unsigned long long comps_real = 0, trocs_real = 0;
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - 1 - i; j++) {
-            (*comp)++;
+            comps_real++;
             if (v[j] > v[j + 1]) {
                 trocar(&v[j], &v[j + 1]);
-                (*troc)++;
+                trocs_real++;
             }
         }
         if (i % (n / 1000 + 1) == 0) {
@@ -71,18 +75,20 @@ void bubble_sort(int v[], int n, const char* nome, long* comp, long* troc) {
     }
     mostrar_progresso(n, n, nome);
     printf("\n");
+    *comp = comps_real / ESCALA;
+    *troc = trocs_real / ESCALA;
 }
 
-// BubbleSort (otimizado)
-void bubble_sort_otimizado(int v[], int n, const char* nome, long* comp, long* troc) {
+void bubble_sort_otimizado(int v[], int n, const char* nome, unsigned long long* comp, unsigned long long* troc) {
+    unsigned long long comps_real = 0, trocs_real = 0;
     int trocou;
     for (int i = 0; i < n - 1; i++) {
         trocou = 0;
         for (int j = 0; j < n - 1 - i; j++) {
-            (*comp)++;
+            comps_real++;
             if (v[j] > v[j + 1]) {
                 trocar(&v[j], &v[j + 1]);
-                (*troc)++;
+                trocs_real++;
                 trocou = 1;
             }
         }
@@ -93,19 +99,21 @@ void bubble_sort_otimizado(int v[], int n, const char* nome, long* comp, long* t
     }
     mostrar_progresso(n, n, nome);
     printf("\n");
+    *comp = comps_real / ESCALA;
+    *troc = trocs_real / ESCALA;
 }
 
-// InsertionSort (padrao)
-void insertion_sort(int v[], int n, const char* nome, long* comp, long* troc) {
+void insertion_sort(int v[], int n, const char* nome, unsigned long long* comp, unsigned long long* troc) {
+    unsigned long long comps_real = 0, trocs_real = 0;
     for (int i = 1; i < n; i++) {
         int atual = v[i];
         int j = i - 1;
-        (*comp)++;
+        comps_real++;
         while (j >= 0 && v[j] > atual) {
             v[j + 1] = v[j];
             j--;
-            (*comp)++;
-            (*troc)++;
+            comps_real++;
+            trocs_real++;
         }
         v[j + 1] = atual;
 
@@ -115,20 +123,21 @@ void insertion_sort(int v[], int n, const char* nome, long* comp, long* troc) {
     }
     mostrar_progresso(n, n, nome);
     printf("\n");
+    *comp = comps_real / ESCALA;
+    *troc = trocs_real / ESCALA;
 }
 
-// InsertionSort (otimizado)
-void insertion_sort_otimizado(int v[], int n, const char* nome, long* comp, long* troc)
-{
+void insertion_sort_otimizado(int v[], int n, const char* nome, unsigned long long* comp, unsigned long long* troc) {
+    unsigned long long comps_real = 0, trocs_real = 0;
     for (int i = 1; i < n; i++) {
         int atual = v[i];
         int j = i - 1;
-        (*comp)++;
+        comps_real++;
         while (j >= 0 && v[j] > atual) {
             v[j + 1] = v[j];
             j--;
-            (*comp)++;
-            (*troc)++;
+            comps_real++;
+            trocs_real++;
         }
         v[j + 1] = atual;
 
@@ -136,13 +145,14 @@ void insertion_sort_otimizado(int v[], int n, const char* nome, long* comp, long
             mostrar_progresso(i, n, nome);
         }
     }
-
     mostrar_progresso(n, n, nome);
     printf("\n");
+    *comp = comps_real / ESCALA;
+    *troc = trocs_real / ESCALA;
 }
 
 void processar_ordenacao(const char* nome_algoritmo,
-                         void (*alg)(int*, int, const char*, long*, long*),
+                         void (*alg)(int*, int, const char*, unsigned long long*, unsigned long long*),
                          int* original, int tamanho,
                          const char* nome_entrada) {
     int* temp = malloc(tamanho * sizeof(int));
@@ -151,7 +161,7 @@ void processar_ordenacao(const char* nome_algoritmo,
         exit(1);
     }
 
-    long comparacoes = 0, trocas = 0;
+    unsigned long long comparacoes = 0, trocas = 0;
     copiar_vetor(temp, original, tamanho);
 
     double tempo = medir_tempo(alg, temp, tamanho, nome_algoritmo, &comparacoes, &trocas);
