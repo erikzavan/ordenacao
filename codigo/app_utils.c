@@ -57,21 +57,6 @@ void ordenar_todos(const char* arquivo, const char* nome_entrada) {
     free(original);
 }
 
-void gerador_arquivos(int pequeno, int medio, int grande) {
-    char resposta;
-    printf("quer gerar arquivos binarios? s/n\n> ");
-    char linha[10];
-    fgets(linha, sizeof(linha), stdin);
-    sscanf(linha, " %c", &resposta);
-
-    if (resposta == 's' || resposta == 'S') {
-        gerar_arquivo("dados/pequeno.bin", pequeno);
-        gerar_arquivo("dados/medio.bin", medio);
-        gerar_arquivo("dados/grande.bin", grande);
-        printf("arquivos gerados!\n");
-    }
-}
-
 void menu_busca() {
     while (1) {
         char tipo_busca[20];
