@@ -1,4 +1,3 @@
-
 #ifndef ORDENACAO_H
 #define ORDENACAO_H
 
@@ -7,8 +6,16 @@ void bubble_sort(int v[], int n, const char* nome, long* comp, long* troc);
 void bubble_sort_otimizado(int v[], int n, const char* nome, long* comp, long* troc);
 void insertion_sort(int v[], int n, const char* nome, long* comp, long* troc);
 void insertion_sort_otimizado(int v[], int n, const char* nome, long* comp, long* troc);
+
 double medir_tempo(void (*func)(int*, int, const char*, long*, long*), int* v, int n, const char* nome, long* comp, long* troc);
-void processar_ordenacao(const char* nome_algoritmo, void (*alg)(int*, int, const char*, long*, long*), int* original, int tamanho, const char* nome_entrada);
+
+void processar_ordenacao(const char* nome_algoritmo,
+                         void (*alg)(int*, int, const char*, long*, long*),
+                         int* original, int tamanho,
+                         const char* nome_entrada);
+
 void ordenar_todos(const char* arquivo, const char* nome_entrada);
+void mostrar_progresso(int atual, int total, const char* nome);
+void trocar(int *a, int *b);
 
 #endif
