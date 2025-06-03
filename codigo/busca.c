@@ -3,15 +3,15 @@
 
 int* carregar_dados(const char *nome_arquivo, int *tamanho) {
     //open
-    FILE *arquivo = fopen(nome_arquivo, "rb");
-    if (!arquivo) {
+    FILE *file = fopen(nome_arquivo, "rb");
+    if (!file) {
         exit(EXIT_FAILURE);
     }
 
     //size
-    fseek(arquivo, 0, SEEK_END);
-    long tamanho_bytes = ftell(arquivo);
-    rewind(arquivo);
+    fseek(file, 0, SEEK_END);
+    long tamanho_bytes = ftell(file);
+    rewind(file);
 
     //alloc
     *tamanho = tamanho_bytes / sizeof(int);
@@ -21,8 +21,8 @@ int* carregar_dados(const char *nome_arquivo, int *tamanho) {
     }
 
     //read
-    fread(dados, sizeof(int), *tamanho, arquivo);
-    fclose(arquivo);
+    fread(dados, sizeof(int), *tamanho, file);
+    fclose(file);
 
     return dados;
 }
@@ -51,4 +51,13 @@ int busca_binaria(int *v, int tamanho, int alvo) {
     return -1;
 }
 
+void salvar_vetor(const char* nome_arquivo, int* v, int tamanho){
+    FILE* file = fopen(nome_arquivo, "wb");
+    if (!file) {
+        perror("erro abrir arquivo salvar vetor");
+        exit(EXIT_FAILURE);
+    }
 
+    fwrite(v, sizeof(int), tamanho, file);
+    fclose(file);
+}
