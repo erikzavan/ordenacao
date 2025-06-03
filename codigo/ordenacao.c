@@ -154,7 +154,7 @@ void ordenar_todos(const char* arquivo, const char* nome_entrada) {
     int tamanho;
     int* original = carregar_dados(arquivo, &tamanho);
 
-    printf("ordenando %s...\n", nome_entrada);
+    printf("\nordenando %s...\n", nome_entrada);
 
     processar_ordenacao("selection", selection_sort, original, tamanho, nome_entrada);
     processar_ordenacao("bubble", bubble_sort, original, tamanho, nome_entrada);
