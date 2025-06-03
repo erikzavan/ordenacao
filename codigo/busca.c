@@ -50,3 +50,5 @@ int busca_binaria(int *v, int tamanho, int alvo) {
     }
     return -1;
 }
+
+
