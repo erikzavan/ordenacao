@@ -75,9 +75,11 @@ void menu_busca() {
 
         int tam;
         int* vetor = carregar_dados(nome_arquivo, &tam);
+        long comparacoes = 0;
         int pos = strcmp(tipo_busca, "sequencial") == 0
-            ? busca_sequencial(vetor, tam, valor)
-            : busca_binaria(vetor, tam, valor);
+            ? busca_sequencial(vetor, tam, valor, &comparacoes)
+            : busca_binaria(vetor, tam, valor, &comparacoes);
+
 
         if (pos != -1)
             printf("valor %d encontrado na posicao %d\n", valor, pos);
@@ -94,6 +96,6 @@ void limpar_csv() {
         perror("Erro ao limpar tempos.csv");
         exit(EXIT_FAILURE);
     }
-    fprintf(file, "Algoritmo,Tamanho,Tempo\n");
+    fprintf(file, "Algoritmo,Tamanho,Tempo,Comparacoes,Trocas\n");
     fclose(file);
 }

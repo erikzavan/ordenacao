@@ -18,14 +18,13 @@ void mostrar_progresso(int atual, int total, const char* nome) {
     fflush(stdout);
 }
 
-double medir_tempo(void (*func)(int*, int, const char*), int* v, int n, const char* nome) {
+double medir_tempo(void (*func)(int*, int, const char*, long*, long*), int* v, int n, const char* nome, long* comp, long* troc) {
     clock_t inicio = clock();
-    func(v, n, nome);
+    func(v, n, nome, comp, troc);
     clock_t fim = clock();
 
     double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
     printf("tempo de execucao: %.2f segundos\n---\n", tempo);
-
     return tempo;
 }
 
@@ -143,7 +142,7 @@ void insertion_sort_otimizado(int v[], int n, const char* nome, long* comp, long
 }
 
 void processar_ordenacao(const char* nome_algoritmo,
-                         void (*alg)(int*, int, const char*),
+                         void (*alg)(int*, int, const char*, long*, long*),
                          int* original, int tamanho,
                          const char* nome_entrada) {
     int* temp = malloc(tamanho * sizeof(int));
@@ -152,9 +151,11 @@ void processar_ordenacao(const char* nome_algoritmo,
         exit(1);
     }
 
+    long comparacoes = 0, trocas = 0;
     copiar_vetor(temp, original, tamanho);
-    double tempo = medir_tempo(alg, temp, tamanho, nome_algoritmo);
-    salvar_csv(nome_algoritmo, nome_entrada, tempo);
+
+    double tempo = medir_tempo(alg, temp, tamanho, nome_algoritmo, &comparacoes, &trocas);
+    salvar_csv(nome_algoritmo, nome_entrada, tempo, comparacoes, trocas);
 
     char nome_bin[100];
     sprintf(nome_bin, "dados/ordenado_%s_%s.bin", nome_algoritmo, nome_entrada);
