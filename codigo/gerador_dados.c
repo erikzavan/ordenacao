@@ -3,8 +3,8 @@
 #include <time.h>
 
 void gerar_arquivo(const char* nome, int quantidade) {
-	FILE *arquivo = fopen(nome, "wb");
-		if (!arquivo) {
+	FILE *file = fopen(nome, "wb");
+		if (!file) {
     		perror("Erro ao abrir arquivo");
     		exit(1);
 	}
@@ -12,8 +12,8 @@ void gerar_arquivo(const char* nome, int quantidade) {
 	srand(time(NULL));
 	for (int i = 0; i < quantidade; i++) {
     		int numero = rand() % 10000;  // números entre 0 e 9999
-    		fwrite(&numero, sizeof(int), 1, arquivo);
+    		fwrite(&numero, sizeof(int), 1, file);
 	}
 
-	fclose(arquivo);
+	fclose(file);
 }
