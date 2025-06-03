@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include "ordenacao.h"
+#include "busca.h"
 #include "app_utils.h"
+#include "gerador_dados.h"
 
 int main() {
     int pequeno = 40000, medio = 100000, grande = 250000;
