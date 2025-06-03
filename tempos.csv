@@ -1,1 +1,16 @@
-insertion_sort_otimizado,grande,37.1720
+Algoritmo,Tamanho,Tempo
+selection_sort,pequeno,2.3340
+bubble_sort,pequeno,5.2450
+bubble_sort_otimizado,pequeno,5.4820
+insertion_sort,pequeno,1.4600
+insertion_sort_otimizado,pequeno,1.5570
+selection_sort,medio,11.2790
+bubble_sort,medio,34.8000
+bubble_sort_otimizado,medio,31.0750
+insertion_sort,medio,6.5790
+insertion_sort_otimizado,medio,6.5270
+selection_sort,grande,64.8720
+bubble_sort,grande,183.6910
+bubble_sort_otimizado,grande,188.9720
+insertion_sort,grande,37.0440
+insertion_sort_otimizado,grande,37.3590
